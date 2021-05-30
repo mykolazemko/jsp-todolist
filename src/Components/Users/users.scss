@@ -1,0 +1,19 @@
+.users {
+   display: flex;
+   flex-direction: row;
+   .users-list {
+      width: 300px;
+      .user-li {
+         cursor: pointer;
+         &:hover {
+            background-color: #bbb;
+         }
+         .user-name{
+            text-decoration: none;
+         }
+         .delete-item{
+            color: #f00;
+         }
+      }
+   }
+}

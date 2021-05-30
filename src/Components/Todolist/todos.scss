@@ -1,0 +1,30 @@
+.todos{
+    display: flex;
+    justify-content: center;
+    width: 90vw;
+    margin: 2px;
+    &:nth-child(2n+1){
+      background-color: #eee;
+    }
+}
+.todo-li{
+    cursor: pointer;
+    span:first-of-type{
+        display: inline-block;
+        border-radius: 3px;
+        width: 80vw;
+        &:hover{
+            background-color: #bbb;
+        }
+    }
+    
+    .line-through{
+        text-decoration: line-through;
+    }
+    .active-task{
+        color: #f00;
+    }
+    .done-task{
+        color: #0f0;
+    }
+}

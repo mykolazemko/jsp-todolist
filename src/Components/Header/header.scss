@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 70px;
+    background-color: #222;
+    &__menu-item{
+        margin: 0 15px;
+    }
+    a{
+        color: #fff;
+        text-decoration: none;
+    }
+}

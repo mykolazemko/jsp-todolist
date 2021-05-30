@@ -1,29 +1,24 @@
-import { useState } from 'react';
-import Todos from './Components/Todos/Tdos'
-import InputForm from './Components/InputForm/InputForm'
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Header from './Components/Header/Header';
+import TodoList from './Components/Todolist/Todolist';
+import HomePage from './Components/HomePage/HomePage';
+import Users from './Components/Users/Users';
+import Page_404 from './Components/Page_404/Page_404';
 
 function App() {
 
-    const [todos, setTodos] = useState([]);
-    const [id, setId] = useState(1)
-
-    const addTodo = (text) => {       
-        setTodos([...todos, {id:id, value:text, done:false}])
-        setId(id+1)
-    }
- console.log(todos)
+   
    
     return (
-        <div className="App">
-           {todos.map((todo, index) => <Todos
-                todo={todo}
-                key={index}
-                id={todo.id}
-                status={todo.done}
-                todos={todos}
-                setTodos={setTodos}/>)}
-            <InputForm addTodo={addTodo}/>
-        </div>
+        <BrowserRouter>
+                <Header />
+            <Switch>
+                <Route exact path='/' component={HomePage} />
+                <Route path='/todolist' component={TodoList} />
+                <Route path='/users' component={Users} />
+                <Route path='*' component={Page_404} />
+            </Switch>
+        </BrowserRouter>
     );
 }
 
