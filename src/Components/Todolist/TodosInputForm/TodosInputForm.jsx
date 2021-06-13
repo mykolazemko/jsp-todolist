@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const InputForm = ({addTodo}) => {
+const TodosInputForm = ({addTodo}) => {
 
     const [value, setValue] = useState("");
 
@@ -21,4 +21,4 @@ const InputForm = ({addTodo}) => {
         </div>
     )
 }
-export default InputForm
+export default TodosInputForm

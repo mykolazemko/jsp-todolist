@@ -1,50 +1,73 @@
 import { useState, useEffect } from 'react';
 import { Route, Link, useParams, useRouteMatch } from "react-router-dom";
+import { fetchUsers, addNewUser, deleteUser } from '../../Redux/actions/usersAction';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import './users.scss'
 
 const Users = () => {
-    const [usersList, setUsersList] = useState([]);
+    const userData = useSelector(state => state.users);
+    const dispatch = useDispatch();
+    const [value, setValue] = useState("");
 
     useEffect(() => {
-         async function fetchUsersList() {
-        fetch('https://jsonplaceholder.typicode.com/users/')
-            .then(usersData => usersData.json())
-            .then(json => setUsersList(json))
-        }
-        fetchUsersList()
-    }, []);
-
+        dispatch(fetchUsers());
+    }, [dispatch]);
     
     const {url, path} = useRouteMatch();
     
     const User = () => {
-        const {id} = useParams();
-        console.log(useParams())
+        const {id} = useParams();       
         return (
-            <div>{id}
-            {console.log(id)}</div>
+            <div>                
+                {`User ID: ${id}`}               
+            </div>
         )
     }
-    // const deleteTodo = () => setUsersList(usersList.filter(user => user.id !== id))
-    const deleteTodo = (id) => setUsersList(usersList.filter(user=>user.id !== id))
     
-    return (
-        <div className='users'>
-            <div className='users-list'>
-                {usersList.map(user => 
-                    <div className='user-li'>
-                        <Link className="user-name" to={`${url}/${user.id}`}>{user.name}</Link>
-                        <span onClick={() => deleteTodo(user.id)} className="delete-item">[X]</span>
-                    </div>)}
-            </div>
-            <div>
-                <Route path={`${url}/:id`}>
-                    <h1>Info about each user</h1>
-                     <User />
-                </Route>
-            </div>
+    const deleteUserItem = (id) => {
+        dispatch(deleteUser(id))  
+    }    
 
-        </div>
+    const addUser = () => {
+        dispatch(addNewUser(value))
+        setValue("");
+    }
+
+    return (
+        <>
+            <div className="input-field">
+                <input type="text" value={value} onChange={(event)=>setValue(event.target.value)}/>
+                <button onClick={() => addUser()}>Add user</button>
+            </div>
+            <div className='users'>                            
+                <div className='users-list'>         
+                    {userData.users.map(user => 
+                        <div className='user-li'>
+                            <Link className="user-name" to={`${url}/${user.id}`}>{user.name}</Link>                         
+                            <span onClick={() => deleteUserItem(user.id)} className="delete-item">[X]</span>
+                        </div>)
+                    }
+                </div>
+                <div>
+                    <Route path={`${url}/:id`}>
+                        <h1>Info about each user</h1>
+                        <User />
+                    </Route>
+                </div>
+
+            </div>
+        </>
     )
 }
-export default Users
+const mapStateToProps = state => {
+    return {
+        userData: state.users    
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchUsers: () => dispatch(fetchUsers())
+    }
+}
+export default Users;

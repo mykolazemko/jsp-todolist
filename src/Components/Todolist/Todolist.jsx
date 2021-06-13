@@ -1,41 +1,50 @@
-import { useState } from 'react';
-import Todos from './Todos/Tdos';
-import InputForm from './InputForm/InputForm';
+import { useState, useEffect } from 'react';
+import Todos from './Todos/Todos';
+import { fetchTodos, addNewTodo, doneTodo, deleteTodo } from '../../Redux/actions/todosAction';
+import TodosInputForm from './TodosInputForm/TodosInputForm';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 import './todos.scss'
 
 
 const TodoList = () => {
-    const [todos, setTodos] = useState([]);
-    const [id, setId] = useState(1);
-    const [taskStatus, setTaskStatus] = useState(false)
+    // const [todos, setTodos] = useState([]);
+    // const [id, setId] = useState(1);
 
-    const addTodo = (text) => {       
-        setTodos([...todos, {id:id, value:text, done:false}])
-        setId(id+1)
+    const userData = useSelector(state => state.todos);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchTodos());
+    }, [dispatch]);
+    
+    const addTodo = (value) => {
+       dispatch(addNewTodo({ id: userData.todos.length + 1, title: value }))       
+    }
+    
+    const doneTodoItem = (id) => {
+        dispatch(doneTodo(id))
     }
 
-    const doneTodo = (id) => {
-        setTodos(todos.map((todo) => {
-            return todo.id === id ? {...todo, done: !todo.done} : todo;
-        }))
-        console.log(todos)
+    const deleteTodoItem = (id) => {
+        dispatch(deleteTodo(id))
     }
-
-    return(
+    return (
         <div>
-        {todos.map((todo, index) => <Todos
-             todo={todo}
-             key={index}
-             id={todo.id}
-             status={todo.done}
-             todos={todos}
-             doneTodo={doneTodo}
-             setTodos={setTodos}/>)}
-             
-         <InputForm addTodo={addTodo}/>
-     </div>
+            <TodosInputForm addTodo={addTodo} />
+
+            {userData.todos.map((todo, index) => <Todos
+
+                title={todo.title}
+                deleteTodoItem={deleteTodoItem}
+                key={index}
+                id={todo.id}
+                status={todo.completed}
+                doneTodoItem={doneTodoItem}
+            />)}
+        </div>
     )
-  
+
 }
+
 export default TodoList
