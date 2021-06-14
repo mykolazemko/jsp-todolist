@@ -8,8 +8,6 @@ import './todos.scss'
 
 
 const TodoList = () => {
-    // const [todos, setTodos] = useState([]);
-    // const [id, setId] = useState(1);
 
     const userData = useSelector(state => state.todos);
     const dispatch = useDispatch();
