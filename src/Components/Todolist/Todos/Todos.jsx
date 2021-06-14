@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchTodos, addNewTodo, deleteTodo } from '../../../Redux/actions/todosAction';
 import { connect, useDispatch, useSelector } from 'react-redux';
-// const Todos = ({ todo, id, status, todos, setTodos, doneTodo }) => {
 const Todos = ({id, title, status, deleteTodoItem, doneTodoItem}) => {
 
 
