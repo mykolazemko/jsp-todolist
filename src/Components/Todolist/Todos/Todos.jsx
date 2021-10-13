@@ -3,9 +3,6 @@ import { fetchTodos, addNewTodo, deleteTodo } from '../../../Redux/actions/todos
 import { connect, useDispatch, useSelector } from 'react-redux';
 const Todos = ({id, title, status, deleteTodoItem, doneTodoItem}) => {
 
-
-  
-
     return (
         <div className="todos">
             {status
@@ -21,4 +18,5 @@ const Todos = ({id, title, status, deleteTodoItem, doneTodoItem}) => {
         </div>
     )
 }
+
 export default Todos

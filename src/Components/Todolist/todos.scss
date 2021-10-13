@@ -4,7 +4,10 @@
     width: 90vw;
     margin: 2px;
     &:nth-child(2n+1){
-      background-color: #eee;
+        background-color: #eee;
+    }
+    &:hover{
+        background-color: #ddd;
     }
 }
 .todo-li{
@@ -13,9 +16,6 @@
         display: inline-block;
         border-radius: 3px;
         width: 80vw;
-        &:hover{
-            background-color: #bbb;
-        }
     }
     
     .line-through{

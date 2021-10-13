@@ -1,4 +1,11 @@
-import { FETCH_TODOS_REQUEST, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE, ADD_NEW_TODO, DELETE_TODO, DONE_TODO } from "../actions/todosAction"
+import {
+    FETCH_TODOS_REQUEST,
+    FETCH_TODOS_SUCCESS,
+    FETCH_TODOS_FAILURE,
+    ADD_NEW_TODO,
+    DELETE_TODO,
+    DONE_TODO
+} from "../actions/todosAction"
 
 const initialState = {
     lading: false,

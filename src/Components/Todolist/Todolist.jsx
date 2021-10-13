@@ -27,6 +27,8 @@ const TodoList = () => {
     const deleteTodoItem = (id) => {
         dispatch(deleteTodo(id))
     }
+
+    
     return (
         <div>
             <TodosInputForm addTodo={addTodo} />

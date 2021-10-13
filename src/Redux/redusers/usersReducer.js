@@ -1,4 +1,10 @@
-import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, ADD_NEW_USER, DELETE_USER } from "../actions/usersAction"
+import {
+    FETCH_USERS_REQUEST,
+    FETCH_USERS_SUCCESS,
+    FETCH_USERS_FAILURE,
+    ADD_NEW_USER,
+    DELETE_USER
+} from "../actions/usersAction"
 
 const initialState = {
     lading: false,
