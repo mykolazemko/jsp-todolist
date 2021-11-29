@@ -4,10 +4,12 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import usersReduser from "./redusers/usersReducer";
 import todosReduser from "./redusers/todosReducer";
+import citiesReduser from "./redusers/citiesReduser";
 
 const allReducers = combineReducers({
     users: usersReduser,
-    todos: todosReduser
+    todos: todosReduser,
+    cities: citiesReduser
 });
 
 export const store = createStore(

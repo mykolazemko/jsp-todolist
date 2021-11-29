@@ -8,7 +8,7 @@ import {
 
 const initialState = {
     loading: false,
-    users: [],
+    cities: ["Lviv", "Ternopil", "Kharkiv", "Cairo", "Tokio"],
     error: ""
 }
 
