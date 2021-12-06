@@ -6,30 +6,39 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 const WeatherPage = () => {
     const citiesData = useSelector(state => state.cities);
     console.log(citiesData)
-    const city = "Cairo"
+    const [city, setSity] = useState("Lviv");
     const [weather, setWeather] = useState();
-    const [units, setSetUnits] = useState("C");
-    const baseURL = `https://wttr.in/${city}?format=j1`
+    const [units, setSetUnits] = useState("C"); 
+    const baseURL = `https://wttr.in/${city}?format=j1`;   
 
+
+    useEffect (() => {
+
+    })
+    
     useEffect(() => {
         axios.get(baseURL)
             .then((response) => {
             setWeather(weather => response.data);
-            console.log(response.data);
         });
-    },[])
+    },[city])
+    console.log(weather);
 
     const handleChangeUnits = (u) => {
         setSetUnits(u.target.value)
+    }
+
+    const handleCity = event => {
+        setSity(event.target.value)
     }
 
     
     
     return (
         <div>
-            <span>
+            <span className={style.selectBlock}>
                 <p>Select the city</p>
-                <select name="" id="">
+                <select name="" id="" onChange = {(event) => handleCity(event)}>
                     {citiesData.cities.map( city => 
                         <option value={city}>{city}</option>
                     )}

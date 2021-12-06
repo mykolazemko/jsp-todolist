@@ -8,24 +8,24 @@ const fetchData = async () => {
     let res = await axios.get(baseURL)
     .then(async response => {
         return response;
-      })
-      .catch(error => {
+    })
+    .catch(error => {
         console.log(error);
-      });
+    });
     return res;
 }
 
 const Finance = () => {
     const [exchangeRate, setexchangeRate] = useState();
-    const [currency, setSCurrency] = useState("₴");
+    const [currency, setSCurrency] = useState("UAH");
 
     useEffect(() => {
         axios.get(baseURL)
             .then((response) => {
                 setexchangeRate(response.data);
-            console.log(response.data);
-            console.log(exchangeRate[0].currencyCodeA)
-          });
+            console.table(response.data);
+            //console.log(exchangeRate[0].currencyCodeA)
+        });
     },[])
     const sta = [];
     // { exchangeRate
@@ -46,7 +46,7 @@ const Finance = () => {
     return (
         <div>
             <h1>Finance</h1>
-            <select name="" id="">
+            <select name="" id="" onChange={e => setSCurrency(e.target.value)}>
                 <option value="USD">US Dollar</option>
                 <option value="EUR">Euro</option>
                 <option value="GBP">UK Phound</option>
@@ -58,7 +58,7 @@ const Finance = () => {
             <br />
             { exchangeRate
             ? <div>
-                <span>UAH to USD </span> <br />
+                <span>UAH to {currency} </span> <br />
                 <span>{exchangeRate[0].rateBuy}</span>
                 </div>
             : <span>Loading data...</span>
