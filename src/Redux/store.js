@@ -4,10 +4,12 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import usersReduser from "./redusers/usersReducer";
 import todosReduser from "./redusers/todosReducer";
+import chatReducer from "./redusers/chatReducer";
 
 const allReducers = combineReducers({
     users: usersReduser,
-    todos: todosReduser
+    todos: todosReduser,
+    messages: chatReducer
 });
 
 export const store = createStore(
