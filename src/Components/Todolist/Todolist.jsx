@@ -8,8 +8,6 @@ import './todos.scss'
 
 
 const TodoList = () => {
-    // const [todos, setTodos] = useState([]);
-    // const [id, setId] = useState(1);
 
     const userData = useSelector(state => state.todos);
     const dispatch = useDispatch();
@@ -19,7 +17,7 @@ const TodoList = () => {
     }, [dispatch]);
     
     const addTodo = (value) => {
-       dispatch(addNewTodo({ id: userData.todos.length + 1, title: value }))       
+        dispatch(addNewTodo({ id: userData.todos.length + 1, title: value }))       
     }
     
     const doneTodoItem = (id) => {
@@ -29,19 +27,26 @@ const TodoList = () => {
     const deleteTodoItem = (id) => {
         dispatch(deleteTodo(id))
     }
+    
     return (
         <div>
             <TodosInputForm addTodo={addTodo} />
 
-            {userData.todos.map((todo, index) => <Todos
+            {userData.todos.length == 0
+                ? 
+                <p>no todos</p>
+                : 
+                userData.todos.map((todo, index) => <Todos
+                    title={todo.title}
+                    deleteTodoItem={deleteTodoItem}
+                    key={index}
+                    id={todo.id}
+                    status={todo.completed}
+                    doneTodoItem={doneTodoItem}
+                />)
+                
+            }
 
-                title={todo.title}
-                deleteTodoItem={deleteTodoItem}
-                key={index}
-                id={todo.id}
-                status={todo.completed}
-                doneTodoItem={doneTodoItem}
-            />)}
         </div>
     )
 
