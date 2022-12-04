@@ -72,7 +72,7 @@ const Chat = () => {
       </div>
       <div className="user-input">
         <form onSubmit={handleSubmit}>
-          <textarea name="1" id="you" cols="30" rows="10" value={userInputOne} onChange={(e) => handleInputChange(e)} onKeyDown={onEnterPress}></textarea>
+          <textarea name="1" id="you" cols="30" rows="10" value={userInputOne} onChange={(e) => handleInputChange(e)} ></textarea>
           <input type="submit" value="Send"></input>
         </form>
       </div>

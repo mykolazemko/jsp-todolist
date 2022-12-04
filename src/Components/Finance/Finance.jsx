@@ -4,30 +4,21 @@ import style from "./Finance.module.scss";
 
 const baseURL = "https://api.monobank.ua/bank/currency"
 
-const fetchData = async () => {
-    let res = await axios.get(baseURL)
-    .then(async response => {
-        return response;
-    })
-    .catch(error => {
-        console.log(error);
-    });
-    return res;
-}
-
 const Finance = () => {
     const [exchangeRate, setexchangeRate] = useState();
-    const [currency, setSCurrency] = useState("UAH");
+    const [currency, setSCurrency] = useState("USD");
 
     useEffect(() => {
         axios.get(baseURL)
             .then((response) => {
                 setexchangeRate(response.data);
-            console.table(response.data);
-            //console.log(exchangeRate[0].currencyCodeA)
+        })
+            .catch((error) => {
+                console.log(error.message)
         });
-    },[])
-    const sta = [];
+    },[currency])
+    
+    console.log(exchangeRate)
     // { exchangeRate
     //     ? sta = exchangeRate.filter( cash => cash.currencyCodeA === 840)
     
@@ -35,6 +26,15 @@ const Finance = () => {
 
 
     // Currency codes ISO 4217
+    const Codes = {
+        USD : 840,
+        EUR : 978,
+        GBP : 826,
+        JPY : 392,
+        CHF : 756,
+        CNY : 156,
+        UAH : 980,
+    }
     // USD	840	$
     // EUR	978	€
     // GBP	826	£
@@ -42,7 +42,6 @@ const Finance = () => {
     // CHF	756	₣
     // CNY	156	¥
     // UAH	980 ₴
-    
     return (
         <div>
             <h1>Finance</h1>
@@ -53,16 +52,19 @@ const Finance = () => {
                 <option value="JPY">Japan Yena</option>
                 <option value="CHF">Switzerland Frank</option>
                 <option value="CNY">Chinese Yuan</option>
-                <option value="UAH">Urrainian Hryvnia</option>
             </select>
             <br />
-            { exchangeRate
+            { exchangeRate != undefined
             ? <div>
-                <span>UAH to {currency} </span> <br />
-                <span>{exchangeRate[0].rateBuy}</span>
+                <span> {currency} to UAH </span> <br />
+                <span>{
+                exchangeRate.filter( cash => cash.currencyCodeA === Codes[currency])[0].rateBuy ?
+                exchangeRate.filter( cash => cash.currencyCodeA === Codes[currency])[0].rateBuy :
+                exchangeRate.filter( cash => cash.currencyCodeA === Codes[currency])[0].rateCross
+            }</span>
                 </div>
             : <span>Loading data...</span>
-}
+            }
         </div>
     )
 }
