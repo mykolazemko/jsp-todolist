@@ -1,17 +1,26 @@
 .users {
    display: flex;
+
+   .filter-input {
+      display: block;
+   }
+
    //flex-direction: row;
    .users-list {
-      width: 300px;
+
+      // width: 300px;
       .user-li {
          cursor: pointer;
+
          &:hover {
             background-color: #bbb;
          }
-         .user-name{
+
+         .user-name {
             text-decoration: none;
          }
-         .delete-item{
+
+         .delete-item {
             color: #f00;
          }
       }
